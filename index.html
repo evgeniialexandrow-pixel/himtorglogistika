@@ -270,8 +270,7 @@
         }
         .form__group input[type="text"],
         .form__group input[type="tel"],
-        .form__group input[type="email"],
-        .form__group input[type="file"] {
+        .form__group input[type="email"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #cbd5e1;
@@ -402,7 +401,7 @@
     <!-- ПЕРВЫЙ ЭКРАН -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero__title">Оптовые продажи химической продукции напрямую от производителей</h1>
+            <h1 class="hero__title">Оптовые продажи chemical продукции напрямую от производителей</h1>
             <p class="hero__subtitle">Гарантия качества и надежная доставка соды, натра, галита и хлорида кальция по всей России для промышленных предприятий и госучреждений.</p>
             <div class="hero__actions">
                 <a href="#catalog" class="btn btn--primary">Перейти в каталог</a>
@@ -488,23 +487,20 @@
             <div class="gos-block__form" id="order-form">
                 <h3>Запрос коммерческого предложения / расчета цены</h3>
                 
-                <!-- Новая рабочая форма, отправляющая файлы бесплатно через Web3Forms -->
-                <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" class="form">
+                <!-- Форма с безопасными латинскими именами полей во избежание проблем с кодировкой -->
+                <form action="https://api.web3forms.com/submit" method="POST" class="form">
                     
-                    <!-- Ваш личный токен авторизации -->
                     <input type="hidden" name="access_key" value="e51d3bbc-327c-4e61-97c3-7653e41a335b">
-                    
-                    <!-- Тема входящего письма на вашей почте -->
-                    <input type="hidden" name="subject" value="Новая заявка с сайта ХимТоргЛогистика">
+                    <input type="hidden" name="subject" value="New Order From TorgHimLogistic">
 
                     <div class="form__group">
                         <label for="name">Ваше имя *</label>
-                        <input type="text" id="name" name="Имя" required placeholder="Иван Иванов">
+                        <input type="text" id="name" name="Name" required placeholder="Иван Иванов">
                     </div>
                     
                     <div class="form__group">
                         <label for="phone">Телефон *</label>
-                        <input type="tel" id="phone" name="Телефон" required placeholder="+7 (999) 000-00-00">
+                        <input type="tel" id="phone" name="Phone" required placeholder="+7 (999) 000-00-00">
                     </div>
 
                     <div class="form__group">
@@ -514,12 +510,12 @@
                     
                     <div class="form__group">
                         <label for="product">Какая продукция необходима?</label>
-                        <input type="text" id="product" name="Сообщение/Продукция" placeholder="Например: Сода кальцинированная, 10 тонн">
+                        <input type="text" id="product" name="Product_Message" placeholder="Например: Сода кальцинированная, 10 тонн">
                     </div>
                     
                     <div class="form__group">
-                        <label for="file">Прикрепить ТЗ или Карту партнера (до 10 МБ)</label>
-                        <input type="file" id="file" name="attachment" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png">
+                        <label for="file-link">Ссылка на ТЗ или Карту партнера (Яндекс.Диск, Облако и т.д.)</label>
+                        <input type="text" id="file-link" name="File_Link" placeholder="https://disk.yandex.ru/d/... или ссылка на тендер">
                     </div>
                     
                     <button type="submit" class="btn btn--primary btn--block">Получить расчет стоимости</button>
