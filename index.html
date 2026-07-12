@@ -379,6 +379,7 @@
 </head>
 <body>
 
+    <!-- ШАПКА САЙТА -->
     <header class="header">
         <div class="container header__container">
             <div class="logo">
@@ -398,6 +399,7 @@
         </div>
     </header>
 
+    <!-- ПЕРВЫЙ ЭКРАН -->
     <section class="hero">
         <div class="container">
             <h1 class="hero__title">Оптовые продажи химической продукции напрямую от производителей</h1>
@@ -409,11 +411,13 @@
         </div>
     </section>
 
+    <!-- КАТАЛОГ ПРОДУКЦИИ -->
     <section id="catalog" class="catalog">
         <div class="container">
             <h2 class="section-title">Каталог продукции</h2>
             <div class="catalog__grid">
                 
+                <!-- Товар 1 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Сода кальцинированная</h3>
@@ -426,6 +430,7 @@
                     </div>
                 </div>
 
+                <!-- Товар 2 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Натр едкий (каустик)</h3>
@@ -438,6 +443,7 @@
                     </div>
                 </div>
 
+                <!-- Товар 3 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Минеральный концентрат Галит</h3>
@@ -450,6 +456,7 @@
                     </div>
                 </div>
 
+                <!-- Товар 4 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Хлорид кальция</h3>
@@ -466,6 +473,7 @@
         </div>
     </section>
 
+    <!-- БЛОК ДЛЯ ГОСЗАКУПОК И ФОРМА -->
     <section id="gos" class="gos-block">
         <div class="container gos-block__container">
             <div class="gos-block__info">
@@ -480,7 +488,15 @@
             <div class="gos-block__form" id="order-form">
                 <h3>Запрос коммерческого предложения / расчета цены</h3>
                 
-                <form action="https://formspree.io/f/xvzeopql" method="POST" enctype="multipart/form-data" class="form">
+                <!-- Новая рабочая форма, отправляющая файлы бесплатно через Web3Forms -->
+                <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" class="form">
+                    
+                    <!-- Ваш личный токен авторизации -->
+                    <input type="hidden" name="access_key" value="e51d3bbc-327c-4e61-97c3-7653e41a335b">
+                    
+                    <!-- Тема входящего письма на вашей почте -->
+                    <input type="hidden" name="subject" value="Новая заявка с сайта ХимТоргЛогистика">
+
                     <div class="form__group">
                         <label for="name">Ваше имя *</label>
                         <input type="text" id="name" name="Имя" required placeholder="Иван Иванов">
@@ -492,18 +508,18 @@
                     </div>
 
                     <div class="form__group">
-                        <label for="email">Электронная почта (для КП)</label>
-                        <input type="email" id="email" name="Email" placeholder="example@company.ru">
+                        <label for="email">Электронная почта (для КП) *</label>
+                        <input type="email" id="email" name="Email" required placeholder="example@company.ru">
                     </div>
                     
                     <div class="form__group">
                         <label for="product">Какая продукция необходима?</label>
-                        <input type="text" id="product" name="Продукция/Сообщение" placeholder="Например: Сода кальцинированная, 10 тонн">
+                        <input type="text" id="product" name="Сообщение/Продукция" placeholder="Например: Сода кальцинированная, 10 тонн">
                     </div>
                     
                     <div class="form__group">
-                        <label for="file">Прикрепить ТЗ или Карту партнера</label>
-                        <input type="file" id="file" name="upload">
+                        <label for="file">Прикрепить ТЗ или Карту партнера (до 10 МБ)</label>
+                        <input type="file" id="file" name="attachment" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png">
                     </div>
                     
                     <button type="submit" class="btn btn--primary btn--block">Получить расчет стоимости</button>
@@ -513,6 +529,7 @@
         </div>
     </section>
 
+    <!-- ПРЕИМУЩЕСТВА -->
     <section id="advantages" class="advantages">
         <div class="container">
             <h2 class="section-title">Почему выбирают «ХимТоргЛогистика»</h2>
@@ -533,6 +550,7 @@
         </div>
     </section>
 
+    <!-- КОНТАКТЫ -->
     <section id="contacts" class="contacts">
         <div class="container contacts__container">
             <div class="contacts__info">
@@ -554,6 +572,7 @@
         </div>
     </section>
 
+    <!-- ФУТЕР -->
     <footer class="footer">
         <div class="container footer__container">
             <p>© 2026 ООО «ХимТоргЛогистика». Все права защищены.</p>
