@@ -4,12 +4,381 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Оптовая торговля химической продукцией в Перми | ХимТоргЛогистика</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ОБЩИЕ СТИЛИ */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #1e293b;
+            background-color: #f8fafc;
+            line-height: 1.6;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #0f172a;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #3b82f6;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* КНОПКИ */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 14px;
+            border: none;
+            text-align: center;
+        }
+        .btn--primary {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+        .btn--primary:hover {
+            background-color: #2563eb;
+        }
+        .btn--secondary {
+            background-color: #1e293b;
+            color: #ffffff;
+        }
+        .btn--secondary:hover {
+            background-color: #0f172a;
+        }
+        .btn--outline {
+            background-color: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+        }
+        .btn--outline:hover {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+        .btn--block {
+            display: block;
+            width: 100%;
+        }
+
+        /* ШАПКА */
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+        .logo__subtitle {
+            font-size: 11px;
+            color: #64748b;
+        }
+        .nav {
+            display: flex;
+            gap: 25px;
+        }
+        .nav__link {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .nav__link:hover {
+            color: #3b82f6;
+        }
+        .header__contacts {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .phone {
+            font-weight: 700;
+            color: #0f172a;
+            text-decoration: none;
+        }
+
+        /* ПЕРВЫЙ ЭКРАН */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero__title {
+            font-size: 42px;
+            font-weight: 700;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+        }
+        .hero__subtitle {
+            font-size: 18px;
+            color: #cbd5e1;
+            max-width: 750px;
+            margin: 0 auto 40px;
+        }
+        .hero__actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* КАТАЛОГ */
+        .catalog {
+            padding: 80px 0;
+        }
+        .catalog__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card__content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .product-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+        .product-card__desc {
+            font-size: 14px;
+            color: #475569;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .product-card__meta {
+            list-style: none;
+            font-size: 13px;
+            background-color: #f1f5f9;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .product-card__meta li {
+            margin-bottom: 5px;
+        }
+        .product-card__meta li:last-child {
+            margin-bottom: 0;
+        }
+        .card-btn {
+            margin-top: auto;
+        }
+
+        /* БЛОК ГОСЗАКУПОК И ФОРМА */
+        .gos-block {
+            background-color: #edf2f7;
+            padding: 80px 0;
+        }
+        .gos-block__container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .gos-block__info {
+            flex: 1;
+            min-width: 300px;
+        }
+        .gos-block__info h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+        .gos-block__info p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .gos-block__info ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .gos-block__info li {
+            margin-bottom: 10px;
+        }
+        .gos-block__form {
+            flex: 1;
+            min-width: 300px;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .gos-block__form h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #0f172a;
+        }
+        .form__group {
+            margin-bottom: 15px;
+        }
+        .form__group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #475569;
+        }
+        .form__group input[type="text"],
+        .form__group input[type="tel"],
+        .form__group input[type="email"],
+        .form__group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        .form__privacy {
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* ПРЕИМУЩЕСТВА */
+        .advantages {
+            padding: 80px 0;
+        }
+        .advantages__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .adv-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            border-top: 4px solid #3b82f6;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .adv-card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+        .adv-card p {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        /* КОНТАКТЫ */
+        .contacts {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+        .contacts__container {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .contacts__info, .contacts__map {
+            flex: 1;
+            min-width: 300px;
+        }
+        .contacts__info h2 {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        .contacts__info p {
+            margin-bottom: 12px;
+        }
+        .messengers {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+        }
+        .msg-link {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .msg-link--wa { background-color: #25d366; }
+        .msg-link--tg { background-color: #0088cc; }
+
+        /* ФУТЕР */
+        .footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer__container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 768px) {
+            .header__container { flex-direction: column; gap: 15px; text-align: center; }
+            .nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .header__contacts { flex-direction: column; gap: 10px; }
+            .hero__title { font-size: 28px; }
+            .hero__subtitle { font-size: 15px; }
+            .hero__actions { flex-direction: column; gap: 10px; }
+            .section-title { font-size: 26px; }
+            .gos-block__container { flex-direction: column; gap: 30px; }
+            .contacts__container { flex-direction: column; gap: 30px; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ШАПКА САЙТА -->
     <header class="header">
         <div class="container header__container">
             <div class="logo">
@@ -24,16 +393,15 @@
             </nav>
             <div class="header__contacts">
                 <a href="tel:+73422036003" class="phone">+7 (342) 203-60-03</a>
-                <a href="#callback" class="btn btn--outline">Заказать звонок</a>
+                <a href="#order-form" class="btn btn--outline">Заказать КП</a>
             </div>
         </div>
     </header>
 
-    <!-- ПЕРВЫЙ ЭКРАН -->
     <section class="hero">
         <div class="container">
             <h1 class="hero__title">Оптовые продажи химической продукции напрямую от производителей</h1>
-            <p class="hero__subtitle">Гарантия качества и быстрая доставка соды, натра, галита и хлорида кальция по всей России для промышленных предприятий и госучреждений.</p>
+            <p class="hero__subtitle">Гарантия качества и надежная доставка соды, натра, галита и хлорида кальция по всей России для промышленных предприятий и госучреждений.</p>
             <div class="hero__actions">
                 <a href="#catalog" class="btn btn--primary">Перейти в каталог</a>
                 <a href="#gos" class="btn btn--secondary">Получить КП по 44/223-ФЗ</a>
@@ -41,61 +409,56 @@
         </div>
     </section>
 
-    <!-- КАТАЛОГ ПРОДУКЦИИ -->
     <section id="catalog" class="catalog">
         <div class="container">
             <h2 class="section-title">Каталог продукции</h2>
             <div class="catalog__grid">
                 
-                <!-- Товар 1 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Сода кальцинированная</h3>
-                        <p class="product-card__desc">Марки «А» и «Б». Используется в химической, стекольной и металлургической промышленности.</p>
+                        <p class="product-card__desc">Марки «А» и «Б». Используется в химической, стекольной, электронной и металлургической промышленности.</p>
                         <ul class="product-card__meta">
                             <li><strong>Фасовка:</strong> Мешки 25 кг, МКР</li>
                             <li><strong>ГОСТ:</strong> 5100-85</li>
                         </ul>
-                        <a href="#order-form" class="btn btn--primary card-btn">Запросить прайс</a>
+                        <a href="#order-form" class="btn btn--primary card-btn">Запросить расчет стоимости</a>
                     </div>
                 </div>
 
-                <!-- Товар 2 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Натр едкий (каустик)</h3>
-                        <p class="product-card__desc">Сода каустическая марки РД и чешуированная. Высокая степень очистки для производств.</p>
+                        <p class="product-card__desc">Сода каустическая марки РД (жидкая) и чешуированная. Высокое качество от проверенных заводов.</p>
                         <ul class="product-card__meta">
-                            <li><strong>Фасовка:</strong> Мешки, еврокубы</li>
+                            <li><strong>Фасовка:</strong> Мешки, еврокубы, налив</li>
                             <li><strong>ГОСТ:</strong> 2263-79 / 4328-77</li>
                         </ul>
-                        <a href="#order-form" class="btn btn--primary card-btn">Запросить прайс</a>
+                        <a href="#order-form" class="btn btn--primary card-btn">Запросить расчет стоимости</a>
                     </div>
                 </div>
 
-                <!-- Товар 3 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Минеральный концентрат Галит</h3>
-                        <p class="product-card__desc">Техническая соль типа «С». Применяется для водоочистки, котельных и борьбы с гололедом.</p>
+                        <p class="product-card__desc">Техническая соль типа «С». Применяется для водоочистки, тепловых электростанций, котельных и борьбы с гололедом.</p>
                         <ul class="product-card__meta">
                             <li><strong>Фасовка:</strong> МКР (биг-бэги), навалом</li>
                             <li><strong>Качество:</strong> Высший/Первый сорт</li>
                         </ul>
-                        <a href="#order-form" class="btn btn--primary card-btn">Запросить прайс</a>
+                        <a href="#order-form" class="btn btn--primary card-btn">Запросить расчет стоимости</a>
                     </div>
                 </div>
 
-                <!-- Товар 4 -->
                 <div class="product-card">
                     <div class="product-card__content">
                         <h3>Хлорид кальция</h3>
-                        <p class="product-card__desc">Кальций хлористый технический. Используется в строительстве, нефтедобыче и ЖКХ.</p>
+                        <p class="product-card__desc">Кальций хлористый технический. Широко используется в строительстве, нефтедобыче, очистке стоков и ЖКХ.</p>
                         <ul class="product-card__meta">
                             <li><strong>Фасовка:</strong> Мешки 25 кг, МКР</li>
                             <li><strong>ГОСТ:</strong> 450-77</li>
                         </ul>
-                        <a href="#order-form" class="btn btn--primary card-btn">Запросить прайс</a>
+                        <a href="#order-form" class="btn btn--primary card-btn">Запросить расчет стоимости</a>
                     </div>
                 </div>
 
@@ -103,7 +466,6 @@
         </div>
     </section>
 
-    <!-- БЛОК ДЛЯ ГОСЗАКУПОК -->
     <section id="gos" class="gos-block">
         <div class="container gos-block__container">
             <div class="gos-block__info">
@@ -112,29 +474,38 @@
                 <ul>
                     <li>Бесплатная помощь в формировании технического задания (ТЗ)</li>
                     <li>Оперативное предоставление 3-х коммерческих предложений для обоснования НМЦК</li>
-                    <li>Полное документальное сопровождение и соблюдение сроков</li>
+                    <li>Полное документальное сопровождение и соблюдение сроков отгрузки</li>
                 </ul>
             </div>
             <div class="gos-block__form" id="order-form">
                 <h3>Запрос коммерческого предложения / расчета цены</h3>
-                <!-- Форма настроена на отправку через бесплатный сервис Formspree (замените YOUR_ID на ваш ключ после регистрации) -->
-                <form action="https://formspree.io/f/YOUR_ID" method="POST" class="form">
+                
+                <form action="https://formspree.io/f/xvzeopql" method="POST" enctype="multipart/form-data" class="form">
                     <div class="form__group">
                         <label for="name">Ваше имя *</label>
-                        <input type="text" id="name" name="name" required placeholder="Иван Иванов">
+                        <input type="text" id="name" name="Имя" required placeholder="Иван Иванов">
                     </div>
+                    
                     <div class="form__group">
                         <label for="phone">Телефон *</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 000-00-00">
+                        <input type="tel" id="phone" name="Телефон" required placeholder="+7 (999) 000-00-00">
                     </div>
+
+                    <div class="form__group">
+                        <label for="email">Электронная почта (для КП)</label>
+                        <input type="email" id="email" name="Email" placeholder="example@company.ru">
+                    </div>
+                    
                     <div class="form__group">
                         <label for="product">Какая продукция необходима?</label>
-                        <input type="text" id="product" name="product" placeholder="Например: Сода кальцинированная, 10 тонн">
+                        <input type="text" id="product" name="Продукция/Сообщение" placeholder="Например: Сода кальцинированная, 10 тонн">
                     </div>
+                    
                     <div class="form__group">
                         <label for="file">Прикрепить ТЗ или Карту партнера</label>
-                        <input type="file" id="file" name="upload_file">
+                        <input type="file" id="file" name="upload">
                     </div>
+                    
                     <button type="submit" class="btn btn--primary btn--block">Получить расчет стоимости</button>
                     <p class="form__privacy">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
                 </form>
@@ -142,33 +513,31 @@
         </div>
     </section>
 
-    <!-- ПРЕИМУЩЕСТВА -->
     <section id="advantages" class="advantages">
         <div class="container">
             <h2 class="section-title">Почему выбирают «ХимТоргЛогистика»</h2>
             <div class="advantages__grid">
                 <div class="adv-card">
                     <h4>Прямые поставки</h4>
-                    <p>Продукция по оптовым ценам напрямую от ведущих заводов-производителей (АО «БСК», АО «Содовый Завод» и др.) без посредников.</p>
+                    <p>Продукция по ценам от производителя без лишних посредников. Работаем напрямую с АО «БСК», АО «Содовый Завод» и др.</p>
                 </div>
                 <div class="adv-card">
                     <h4>Надежная логистика</h4>
-                    <p>Быстрая обработка заказов и доставка собственным автотранспортом, а также ж/д путями в любую точку России.</p>
+                    <p>Быстрая обработка заказов, доставка собственным автотранспортом и железнодорожные перевозки по всей России.</p>
                 </div>
                 <div class="adv-card">
-                    <h4>Контроль качества</h4>
-                    <p>Каждая партия сопровождается необходимыми паспортами качества, сертификатами соответствия и строго отвечает ГОСТ/ТУ.</p>
+                    <h4>Гарантия качества</h4>
+                    <p>Каждая партия поставляемой химии строго соответствует стандартам ГОСТ/ТУ и сопровождается паспортами качества.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- КОНТАКТЫ -->
     <section id="contacts" class="contacts">
         <div class="container contacts__container">
             <div class="contacts__info">
                 <h2>Контакты</h2>
-                <p><strong>Телефон:</strong> <a href="tel:+73422036003">+7 (342) 203-60-03</a></p>
+                <p><strong>Телефон:</strong> <a href="tel:+73422036003" class="phone">+7 (342) 203-60-03</a></p>
                 <p><strong>Email:</strong> info@torghimlogistic.ru</p>
                 <p><strong>Адрес офиса:</strong> 614016, Пермский край, г. Пермь, ул. Седова, д. 8, оф. 12</p>
                 <p><strong>Склад/Отгрузка:</strong> Пермский р-н, д. Хмели, шоссе Космонавтов, д. 320 к. 3</p>
@@ -178,17 +547,17 @@
                 </div>
             </div>
             <div class="contacts__map">
-                <!-- Карта Перми (Заглушка интерактивной карты) -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2141.010141697686!2d56.24647351608678!3d58.00169138128913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43e8c7155eef631d%3A0x6b14299b4d8d179!2z0YPQuy4g0KHQtdC00L7QstCwLCA4LCDQn9C10YDRNGMLCDQn9C10YDRNGB0LrQuNC5INC60YDQNC5LCA2MTQwMTY!5e0!3m2!1sru!2sru!4v1680000000000!5m2!1sru!2sru" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                <div style="width: 100%; height: 300px; background-color: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b; font-weight: 500;">
+                    Карта проезда (г. Пермь)
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ФУТЕР -->
     <footer class="footer">
         <div class="container footer__container">
-            <p>&copy; 2026 ООО «ХимТоргЛогистика». Все права защищены.</p>
-            <p style="font-size: 12px; color: #64748b;">Продажа промышленной химии оптом по всей России.</p>
+            <p>© 2026 ООО «ХимТоргЛогистика». Все права защищены.</p>
+            <p style="font-size: 12px; color: #64748b;">Оптовые продажи промышленной химии по всей России.</p>
         </div>
     </footer>
 
